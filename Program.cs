@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("Turdean_Stefan_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Turdean_Stefan_Lab2Context' not found.");
+
+builder.Services.AddDbContext<Turdean_Stefan_Lab2Context>(options => options.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
