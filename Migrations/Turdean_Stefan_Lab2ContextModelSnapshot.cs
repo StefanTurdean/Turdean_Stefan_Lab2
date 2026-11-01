@@ -21,6 +21,27 @@ namespace Turdean_Stefan_Lab2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Authors", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Book", b =>
                 {
                     b.Property<int>("ID")
@@ -29,9 +50,8 @@ namespace Turdean_Stefan_Lab2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("AuthorID")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6, 2)");
@@ -47,6 +67,8 @@ namespace Turdean_Stefan_Lab2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("AuthorID");
 
                     b.HasIndex("PublisherID");
 
@@ -72,9 +94,15 @@ namespace Turdean_Stefan_Lab2.Migrations
 
             modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Book", b =>
                 {
+                    b.HasOne("Turdean_Stefan_Lab2.Models.Authors", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorID");
+
                     b.HasOne("Turdean_Stefan_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
+
+                    b.Navigation("Author");
 
                     b.Navigation("Publisher");
                 });
