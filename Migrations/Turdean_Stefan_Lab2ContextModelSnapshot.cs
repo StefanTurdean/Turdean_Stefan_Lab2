@@ -36,6 +36,9 @@ namespace Turdean_Stefan_Lab2.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6, 2)");
 
+                    b.Property<int?>("PublisherID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("PublishingDate")
                         .HasColumnType("datetime2");
 
@@ -45,7 +48,40 @@ namespace Turdean_Stefan_Lab2.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("PublisherID");
+
                     b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Publisher", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("PublisherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Publisher");
+                });
+
+            modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Book", b =>
+                {
+                    b.HasOne("Turdean_Stefan_Lab2.Models.Publisher", "Publisher")
+                        .WithMany("Books")
+                        .HasForeignKey("PublisherID");
+
+                    b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Publisher", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
