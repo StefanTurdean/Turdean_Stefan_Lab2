@@ -16,7 +16,8 @@ namespace Turdean_Stefan_Lab2.Models
 
         public int? PublisherID { get; set; }
         public Publisher? Publisher { get; set; } //navigation property
-        public Authors? Author { get; set; } //navigation property
+        public int? AuthorID { get; set; }
+        public Author? Author { get; set; } //navigation property
 
     }
 }

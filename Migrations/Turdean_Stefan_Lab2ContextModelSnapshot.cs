@@ -21,7 +21,7 @@ namespace Turdean_Stefan_Lab2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Authors", b =>
+            modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Author", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -39,7 +39,7 @@ namespace Turdean_Stefan_Lab2.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Author");
                 });
 
             modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Book", b =>
@@ -94,7 +94,7 @@ namespace Turdean_Stefan_Lab2.Migrations
 
             modelBuilder.Entity("Turdean_Stefan_Lab2.Models.Book", b =>
                 {
-                    b.HasOne("Turdean_Stefan_Lab2.Models.Authors", "Author")
+                    b.HasOne("Turdean_Stefan_Lab2.Models.Author", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorID");
 

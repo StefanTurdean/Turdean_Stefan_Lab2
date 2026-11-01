@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Turdean_Stefan_Lab2.Models
 {
-    public class Authors
+    public class Author
     {
         public int ID { get; set; }
         [Display(Name = "Author")]
